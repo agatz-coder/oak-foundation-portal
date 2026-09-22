@@ -28,7 +28,7 @@ function Header() {
       <div className="header-inner container">
         <Link to="/" className="header-logo" onClick={closeMobileMenu}>
           <img
-            src="https://oakfnd.org/wp-content/uploads/2021/04/Oak-Foundation-logo-vectorised-color.svg"
+            src={process.env.PUBLIC_URL + '/oak-logo.svg'}
             alt="OAK Foundation"
             className="logo-img"
           />
