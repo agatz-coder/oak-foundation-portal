@@ -1,0 +1,75 @@
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton-container {
+  padding: var(--space-xl);
+}
+
+.skeleton-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.skeleton-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(to right, #e8ecf1 8%, #d5dce4 18%, #e8ecf1 33%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-top: 4px;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(to right, #e8ecf1 8%, #d5dce4 18%, #e8ecf1 33%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-line--long  { width: 85%; }
+.skeleton-line--medium { width: 60%; animation-delay: 0.15s; }
+
+/* Suggestion pills */
+.skeleton-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.skeleton-pill {
+  height: 36px;
+  border-radius: 18px;
+  width: 180px;
+  background: linear-gradient(to right, #e8ecf1 8%, #d5dce4 18%, #e8ecf1 33%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-pill--short  { width: 140px; animation-delay: 0.1s; }
+.skeleton-pill--medium { width: 200px; animation-delay: 0.2s; }
+
+/* Input bar */
+.skeleton-input {
+  height: 48px;
+  border-radius: 24px;
+  background: linear-gradient(to right, #e8ecf1 8%, #d5dce4 18%, #e8ecf1 33%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.3s;
+}

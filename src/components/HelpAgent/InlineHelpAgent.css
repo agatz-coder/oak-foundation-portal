@@ -1,0 +1,222 @@
+/* ── InlineHelpAgent container ──────────────────────────────── */
+.inline-help-agent {
+  background: var(--oak-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  max-width: 800px;
+}
+
+/* ── Welcome screen ────────────────────────────────────────── */
+.help-agent-welcome {
+  padding: var(--space-2xl);
+  text-align: center;
+}
+
+.welcome-header h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-xs);
+}
+
+.welcome-subtitle {
+  color: var(--oak-text-light);
+  margin-bottom: var(--space-xs);
+}
+
+.welcome-hint {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Avatar styles (shared) ────────────────────────────────── */
+.oakie-avatar-lg {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--oak-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-md);
+}
+
+.oakie-icon-lg {
+  font-size: 2rem;
+}
+
+.oakie-avatar-sm {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--oak-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* ── Canned prompts ────────────────────────────────────────── */
+.welcome-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.prompt-btn {
+  padding: 10px 20px;
+  background: var(--oak-light-gray);
+  border: 1px solid var(--oak-gray);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--oak-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.prompt-btn:hover {
+  background: var(--oak-primary);
+  color: var(--oak-white);
+  border-color: var(--oak-primary);
+}
+
+/* ── Input area ────────────────────────────────────────────── */
+.welcome-input-area {
+  display: flex;
+  gap: var(--space-sm);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.welcome-input {
+  flex: 1;
+  padding: 14px 20px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 2px solid var(--oak-gray);
+  border-radius: var(--radius-pill);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.welcome-input:focus {
+  border-color: var(--oak-secondary);
+}
+
+.welcome-send-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--oak-secondary);
+  color: var(--oak-white);
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-send-btn:hover:not(:disabled) {
+  background: var(--oak-primary);
+}
+
+.welcome-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Chatting (active) state ───────────────────────────────── */
+.help-agent-active {
+  padding: var(--space-xl);
+}
+
+.help-agent-active-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.help-agent-active-header h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4caf50;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.status-text {
+  font-size: 0.8rem;
+  color: #4caf50;
+}
+
+.help-agent-active-note {
+  font-size: 0.85rem;
+  color: var(--oak-text-light);
+  background: var(--oak-light-gray);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+/* ── Ended state ───────────────────────────────────────────── */
+.help-agent-ended {
+  padding: var(--space-2xl);
+  text-align: center;
+}
+
+.help-agent-ended h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.help-agent-ended p {
+  color: var(--oak-text-light);
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Fallback / error state ────────────────────────────────── */
+.help-agent-fallback {
+  padding: var(--space-2xl);
+  text-align: center;
+}
+
+.help-agent-fallback h3 {
+  margin-bottom: var(--space-sm);
+  color: var(--oak-primary);
+}
+
+.help-agent-fallback p {
+  color: var(--oak-text-light);
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .help-agent-welcome,
+  .help-agent-ended,
+  .help-agent-fallback {
+    padding: var(--space-xl);
+  }
+
+  .welcome-prompts {
+    gap: var(--space-xs);
+  }
+
+  .prompt-btn {
+    font-size: 0.8rem;
+    padding: 8px 14px;
+  }
+}

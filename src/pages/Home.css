@@ -1,0 +1,116 @@
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--space-xl);
+}
+
+.section-link {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--oak-secondary);
+}
+
+.section-link:hover {
+  color: var(--oak-primary);
+}
+
+.section--gray {
+  background-color: var(--oak-light-gray);
+}
+
+/* Ask Oakie Teaser */
+.ask-oakie-section {
+  background: var(--oak-light-gray);
+  padding: var(--space-2xl) 0;
+}
+
+.ask-oakie-teaser {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: flex-start;
+  background: var(--oak-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  max-width: 800px;
+}
+
+.oakie-avatar {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--oak-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oakie-icon {
+  font-size: 1.5rem;
+}
+
+.oakie-content h3 {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-xs);
+}
+
+.oakie-content > p {
+  font-size: 0.9rem;
+  color: var(--oak-text-light);
+  margin-bottom: var(--space-sm);
+}
+
+.oakie-hint {
+  font-size: 0.85rem !important;
+  color: var(--oak-text-light) !important;
+}
+
+.oakie-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.oakie-prompt-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--oak-light-gray);
+  border: 1px solid var(--oak-gray);
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  color: var(--oak-primary);
+  transition: all var(--transition-fast);
+}
+
+.oakie-prompt-btn:hover {
+  background: var(--oak-primary);
+  color: var(--oak-white);
+  border-color: var(--oak-primary);
+}
+
+.oakie-cta {
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .ask-oakie-teaser {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .oakie-prompts {
+    justify-content: center;
+  }
+}

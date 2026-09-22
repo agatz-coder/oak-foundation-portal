@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OAK Foundation Portal - Design Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://assets.meshmesh.io/system/tailwindcss-browser-4.js"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-primary: #002D56;
+      --color-secondary: #0B99BC;
+      --color-tertiary: #AFBED3;
+      --color-accent: #1EACCC;
+      --color-environment: #969537;
+      --color-climate: #0F5372;
+      --color-housing: #6C7970;
+      --color-rights: #917B8A;
+      --color-women: #655E9B;
+      --color-learning: #57688B;
+      --color-denmark: #E6673E;
+      --font-heading: 'Lexend', sans-serif;
+      --font-body: 'Calibri', 'Segoe UI', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 font-body">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
+    <div class="max-w-[1140px] mx-auto px-6 h-[72px] flex items-center justify-between">
+      <a href="#"><img src="https://oakfnd.org/wp-content/uploads/2021/04/Oak-Foundation-logo-vectorised-color.svg" alt="OAK Foundation" class="h-11" /></a>
+      <nav class="flex items-center gap-8">
+        <a href="#" class="font-heading text-sm font-medium text-primary border-b-2 border-secondary pb-1">Home</a>
+        <a href="#about" class="font-heading text-sm font-medium text-primary hover:text-secondary transition">About</a>
+        <a href="#programmes" class="font-heading text-sm font-medium text-primary hover:text-secondary transition">Programmes</a>
+        <a href="#knowledge" class="font-heading text-sm font-medium text-primary hover:text-secondary transition">Knowledge</a>
+        <a href="#help" class="font-heading text-sm font-medium text-primary hover:text-secondary transition">Help</a>
+        <a href="#contact" class="font-heading text-sm font-medium text-primary hover:text-secondary transition">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative min-h-[480px] flex items-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80')">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/85 to-primary/60"></div>
+    <div class="relative z-10 max-w-[1140px] mx-auto px-6 py-20">
+      <span class="inline-block font-heading text-xs font-semibold uppercase tracking-widest text-tertiary mb-4">OAK Foundation - Grantee Portal</span>
+      <h1 class="font-heading text-5xl font-bold text-white max-w-[680px] mb-6 leading-tight">Address issues of global, social, and environmental concern.</h1>
+      <p class="text-tertiary text-lg max-w-[560px] mb-8 leading-relaxed">Everything the OAK Foundation grantees and partners need — programme knowledge, policies, and support — in one place.</p>
+      <div class="flex gap-4 flex-wrap">
+        <a href="#programmes" class="inline-flex items-center gap-2 px-7 py-3 bg-secondary text-white font-semibold rounded-full border-2 border-secondary hover:bg-primary hover:border-primary transition">Explore programmes &#8594;</a>
+        <a href="#knowledge" class="inline-flex items-center gap-2 px-7 py-3 bg-white text-primary font-semibold rounded-full border-2 border-white hover:bg-transparent hover:text-white transition">Find a policy or resource</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASK OAKIE -->
+  <section class="bg-gray-50 py-10">
+    <div class="max-w-[1140px] mx-auto px-6">
+      <div class="flex gap-6 items-start bg-white rounded-xl p-8 shadow-md max-w-[800px]">
+        <div class="shrink-0 w-13 h-13 rounded-full bg-secondary flex items-center justify-center text-2xl">&#x1F333;</div>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-primary mb-1">Ask Oakie</h3>
+          <p class="text-sm text-gray-500 mb-1">Your AI-powered assistant for OAK Foundation</p>
+          <p class="text-sm text-gray-400 mb-3">Try asking about any of the following — or anything else about how we work:</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <a href="#help" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm text-primary hover:bg-primary hover:text-white hover:border-primary transition">How do I apply for a grant?</a>
+            <a href="#help" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm text-primary hover:bg-primary hover:text-white hover:border-primary transition">What are the reporting requirements?</a>
+            <a href="#help" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm text-primary hover:bg-primary hover:text-white hover:border-primary transition">Tell me about OAK's safeguarding policy</a>
+          </div>
+          <a href="#help" class="inline-flex items-center gap-2 px-6 py-2.5 bg-secondary text-white font-semibold rounded-full text-sm hover:bg-primary transition">Start a conversation &#8594;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMME AREAS -->
+  <section id="programmes" class="py-20">
+    <div class="max-w-[1140px] mx-auto px-6">
+      <div class="flex justify-between items-end mb-8">
+        <div>
+          <span class="font-heading text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2 block">Our Work</span>
+          <h2 class="font-heading text-3xl font-bold text-primary">Programme areas</h2>
+        </div>
+        <a href="#" class="font-heading text-sm font-medium text-secondary hover:text-primary transition">All programmes &#8594;</a>
+      </div>
+      <div class="grid grid-cols-3 gap-6">
+        <!-- Environment -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=75" class="w-full h-full object-cover hover:scale-103 transition-transform duration-500" />
+            <span class="absolute top-4 right-4 w-8 h-1 rounded bg-environment"></span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-heading text-lg font-bold text-primary mb-1">Environment</h3>
+            <p class="text-sm text-gray-500">Marine, forest, and freshwater protection.</p>
+          </div>
+        </div>
+        <!-- Global Climate -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=75" class="w-full h-full object-cover" />
+            <span class="absolute top-4 right-4 w-8 h-1 rounded bg-climate"></span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-heading text-lg font-bold text-primary mb-1">Global Climate</h3>
+            <p class="text-sm text-gray-500">Cutting greenhouse-gas emissions at scale.</p>
+          </div>
+        </div>
+        <!-- Housing -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=75" class="w-full h-full object-cover" />
+            <span class="absolute top-4 right-4 w-8 h-1 rounded bg-housing"></span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-heading text-lg font-bold text-primary mb-1">Housing & Homelessness</h3>
+            <p class="text-sm text-gray-500">A safe, secure home for everyone.</p>
+          </div>
+        </div>
+        <!-- Human Rights -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953bc8b86b?w=600&q=75" class="w-full h-full object-cover" />
+            <span class="absolute top-4 right-4 w-8 h-1 rounded bg-rights"></span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-heading text-lg font-bold text-primary mb-1">International Human Rights</h3>
+            <p class="text-sm text-gray-500">Defending freedoms and dignity worldwide.</p>
+          </div>
+        </div>
+        <!-- Women -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=75" class="w-full h-full object-cover" />
+            <span class="absolute top-4 right-4 w-8 h-1 rounded bg-women"></span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-heading text-lg font-bold text-primary mb-1">Issues Affecting Women</h3>
+            <p class="text-sm text-gray-500">Ending violence against women and girls.</p>
+          </div>
+        </div>
+        <!-- Learning -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=75" class="w-full h-full object-cover" />
+            <span class="absolute top-4 right-4 w-8 h-1 rounded bg-learning"></span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-heading text-lg font-bold text-primary mb-1">Learning Differences</h3>
+            <p class="text-sm text-gray-500">Every learner reaches their full potential.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPDATES / NEWS -->
+  <section class="bg-gray-50 py-20">
+    <div class="max-w-[1140px] mx-auto px-6">
+      <div class="flex justify-between items-end mb-8">
+        <div>
+          <span class="font-heading text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2 block">Latest</span>
+          <h2 class="font-heading text-3xl font-bold text-primary">Updates for grantees</h2>
+        </div>
+        <a href="#" class="font-heading text-sm font-medium text-secondary hover:text-primary transition">All updates &#8594;</a>
+      </div>
+      <div class="grid grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=75" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-6">
+            <span class="font-heading text-xs font-semibold uppercase tracking-wider text-environment">Grant-Making</span>
+            <h3 class="font-heading text-base font-bold text-primary mt-2">New grant cycle opens for Environment programme</h3>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=75" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-6">
+            <span class="font-heading text-xs font-semibold uppercase tracking-wider text-secondary">Programme</span>
+            <h3 class="font-heading text-base font-bold text-primary mt-2">Safeguarding training now available for all partners</h3>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=75" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-6">
+            <span class="font-heading text-xs font-semibold uppercase tracking-wider text-denmark">Update</span>
+            <h3 class="font-heading text-base font-bold text-primary mt-2">Reporting portal improvements for Q4 2026</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KNOWLEDGE BASE -->
+  <section id="knowledge" class="py-20">
+    <div class="max-w-[1140px] mx-auto px-6">
+      <div class="mb-8">
+        <span class="font-heading text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2 block">Resources</span>
+        <h2 class="font-heading text-3xl font-bold text-primary mb-2">Knowledge Base</h2>
+        <p class="text-gray-500 max-w-[560px]">Find answers to common questions about grants, reporting, policies, and working with OAK Foundation.</p>
+      </div>
+      <div class="mb-8">
+        <input type="text" placeholder="Search articles..." class="w-full max-w-[480px] px-5 py-3 border-2 border-gray-200 rounded-lg font-body text-sm outline-none focus:border-secondary transition" />
+      </div>
+      <div class="flex flex-col gap-4">
+        <a href="#" class="block bg-white rounded-lg p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all border border-gray-100">
+          <span class="font-heading text-xs font-semibold uppercase tracking-wider text-environment">Grant-Making</span>
+          <h3 class="font-heading text-lg font-bold text-primary mt-2 mb-1">How to apply for an OAK Foundation grant</h3>
+          <p class="text-sm text-gray-500 mb-2">Overview of the grant application process from Letter of Inquiry to full proposal, including eligibility criteria and expected timelines.</p>
+          <span class="text-xs text-gray-400">2026-09-22</span>
+        </a>
+        <a href="#" class="block bg-white rounded-lg p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all border border-gray-100">
+          <span class="font-heading text-xs font-semibold uppercase tracking-wider text-secondary">Grantee Resources</span>
+          <h3 class="font-heading text-lg font-bold text-primary mt-2 mb-1">Understanding OAK Foundation's reporting requirements</h3>
+          <p class="text-sm text-gray-500 mb-2">What narrative and financial reports are expected from grantees, reporting frequency, deadlines, and how to submit through the portal.</p>
+          <span class="text-xs text-gray-400">2026-09-22</span>
+        </a>
+        <a href="#" class="block bg-white rounded-lg p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all border border-gray-100">
+          <span class="font-heading text-xs font-semibold uppercase tracking-wider text-climate">Policies</span>
+          <h3 class="font-heading text-lg font-bold text-primary mt-2 mb-1">OAK Foundation's safeguarding policy for partners</h3>
+          <p class="text-sm text-gray-500 mb-2">Summary of OAK's safeguarding commitments, partner expectations, and how to report concerns or incidents.</p>
+          <span class="text-xs text-gray-400">2026-09-22</span>
+        </a>
+        <a href="#" class="block bg-white rounded-lg p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all border border-gray-100">
+          <span class="font-heading text-xs font-semibold uppercase tracking-wider text-women">FAQ</span>
+          <h3 class="font-heading text-lg font-bold text-primary mt-2 mb-1">Frequently asked questions for OAK grantees</h3>
+          <p class="text-sm text-gray-500 mb-2">Answers to common questions about budget modifications, no-cost extensions, payment timelines, and who to contact.</p>
+          <span class="text-xs text-gray-400">2026-09-22</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HELP -->
+  <section id="help" class="bg-gray-50 py-20">
+    <div class="max-w-[1140px] mx-auto px-6">
+      <div class="mb-8">
+        <span class="font-heading text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2 block">Support</span>
+        <h2 class="font-heading text-3xl font-bold text-primary mb-2">Help &amp; Support</h2>
+        <p class="text-gray-500 max-w-[560px]">Get help from our AI-powered assistant or browse resources below.</p>
+      </div>
+      <div class="bg-white rounded-xl p-8 shadow-md max-w-[800px]">
+        <div class="flex gap-5 items-start mb-6">
+          <div class="shrink-0 w-14 h-14 rounded-full bg-secondary flex items-center justify-center text-3xl">&#x1F333;</div>
+          <div>
+            <h3 class="font-heading text-xl font-bold text-primary mb-1">Ask Oakie</h3>
+            <p class="text-sm text-gray-500">Your AI-powered assistant for OAK Foundation. Ask about grants, reporting, policies, or anything else.</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-5">
+          <button class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm text-primary hover:bg-primary hover:text-white hover:border-primary transition">How do I apply for a grant?</button>
+          <button class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm text-primary hover:bg-primary hover:text-white hover:border-primary transition">What are the reporting requirements?</button>
+          <button class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm text-primary hover:bg-primary hover:text-white hover:border-primary transition">Tell me about OAK's safeguarding policy</button>
+        </div>
+        <div class="flex gap-3">
+          <input type="text" placeholder="Type your question here..." class="flex-1 px-5 py-3 border-2 border-gray-200 rounded-full font-body text-sm outline-none focus:border-secondary transition" disabled />
+          <button class="px-6 py-3 bg-secondary text-white font-semibold rounded-full text-sm hover:bg-primary transition" disabled>Send</button>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 italic">Help agent will be connected in Phase 3.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-20">
+    <div class="max-w-[1140px] mx-auto px-6">
+      <div class="mb-8">
+        <span class="font-heading text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2 block">Who We Are</span>
+        <h2 class="font-heading text-3xl font-bold text-primary mb-2">About OAK Foundation</h2>
+      </div>
+      <div class="grid grid-cols-2 gap-12">
+        <div>
+          <h3 class="font-heading text-xl font-bold text-primary mb-3">Our Mission</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">OAK Foundation commits its resources to address issues of global, social, and environmental concern, particularly those that have a major impact on the lives of the disadvantaged.</p>
+          <p class="text-gray-600 leading-relaxed">Founded in 1983 by Jette and Alan Parker, the Foundation makes grants to organisations around the world that share a commitment to addressing the root causes of the problems and contributing to lasting, systemic change.</p>
+        </div>
+        <div>
+          <h3 class="font-heading text-xl font-bold text-primary mb-3">How We Work</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">We work through six programme areas, each led by experienced staff who partner closely with grantees. Our approach values trust-based philanthropy, long-term relationships, and systemic change.</p>
+          <h3 class="font-heading text-xl font-bold text-primary mb-3 mt-6">Safeguarding</h3>
+          <p class="text-gray-600 leading-relaxed">OAK Foundation is committed to safeguarding the welfare and safety of children and adults at risk. We expect all partners and grantees to share this commitment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="bg-gray-50 py-20">
+    <div class="max-w-[1140px] mx-auto px-6">
+      <div class="mb-8">
+        <span class="font-heading text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2 block">Get in Touch</span>
+        <h2 class="font-heading text-3xl font-bold text-primary mb-2">Contact Us</h2>
+        <p class="text-gray-500 max-w-[560px]">Have a question or need support? Reach out to our team.</p>
+      </div>
+      <div class="grid grid-cols-5 gap-12">
+        <div class="col-span-3">
+          <form class="flex flex-col gap-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label class="font-heading text-sm font-semibold text-primary">Full Name</label>
+                <input type="text" placeholder="Your name" class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm outline-none focus:border-secondary transition" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="font-heading text-sm font-semibold text-primary">Email</label>
+                <input type="email" placeholder="your@email.com" class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm outline-none focus:border-secondary transition" />
+              </div>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="font-heading text-sm font-semibold text-primary">Organisation</label>
+              <input type="text" placeholder="Your organisation" class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm outline-none focus:border-secondary transition" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="font-heading text-sm font-semibold text-primary">Subject</label>
+              <select class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm outline-none focus:border-secondary transition text-gray-500">
+                <option>Select a topic...</option>
+                <option>Grant Application</option>
+                <option>Reporting</option>
+                <option>Safeguarding</option>
+                <option>Technical Support</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="font-heading text-sm font-semibold text-primary">Message</label>
+              <textarea rows="4" placeholder="How can we help?" class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm outline-none focus:border-secondary transition resize-y"></textarea>
+            </div>
+            <button type="button" class="self-start px-7 py-3 bg-secondary text-white font-semibold rounded-full border-2 border-secondary hover:bg-primary hover:border-primary transition">Send Message &#8594;</button>
+          </form>
+        </div>
+        <div class="col-span-2 flex flex-col gap-4">
+          <div class="bg-white rounded-lg p-6">
+            <h3 class="font-heading text-base font-bold text-primary mb-2">Head Office</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">OAK Foundation<br/>58 avenue Louis Casaï<br/>1216 Cointrin, Geneva<br/>Switzerland</p>
+          </div>
+          <div class="bg-white rounded-lg p-6">
+            <h3 class="font-heading text-base font-bold text-primary mb-2">Ask Oakie</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">Need a quick answer? Try our AI assistant for immediate help with common questions.</p>
+            <a href="#help" class="inline-flex items-center gap-2 mt-3 text-sm font-semibold text-secondary hover:text-primary transition">Start a conversation &#8594;</a>
+          </div>
+          <div class="bg-white rounded-lg p-6">
+            <h3 class="font-heading text-base font-bold text-primary mb-2">Safeguarding Concerns</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">If you have any safeguarding concerns, please contact us through the dedicated safeguarding channel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-primary text-white py-16">
+    <div class="max-w-[1140px] mx-auto px-6">
+      <div class="grid grid-cols-4 gap-12 mb-12">
+        <div class="col-span-1">
+          <img src="https://oakfnd.org/wp-content/uploads/2021/04/Oak-Foundation-logo-vectorised-color.svg" alt="OAK Foundation" class="h-12 brightness-0 invert mb-4" />
+          <p class="text-tertiary text-sm leading-relaxed">Contributing to a safer, fairer, and more sustainable world.</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="font-heading text-xs font-semibold uppercase tracking-wider text-tertiary mb-2">Quick Links</h4>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">About Us</a>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">Programmes</a>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">Knowledge Base</a>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">Contact</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="font-heading text-xs font-semibold uppercase tracking-wider text-tertiary mb-2">For Grantees</h4>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">Grant Application Guide</a>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">Reporting Requirements</a>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">Ask Oakie</a>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">Get Support</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="font-heading text-xs font-semibold uppercase tracking-wider text-tertiary mb-2">Connect</h4>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">LinkedIn</a>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">YouTube</a>
+          <a href="#" class="text-white/85 text-sm hover:text-white transition">Instagram</a>
+        </div>
+      </div>
+      <div class="flex justify-between items-center pt-8 border-t border-white/15">
+        <p class="text-tertiary text-sm">&copy; 2026 OAK Foundation. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="text-tertiary text-sm hover:text-white transition">Privacy Policy</a>
+          <a href="#" class="text-tertiary text-sm hover:text-white transition">Safeguarding</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

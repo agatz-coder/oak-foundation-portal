@@ -1,0 +1,116 @@
+.help-agent-container {
+  max-width: 800px;
+}
+
+.help-agent-placeholder {
+  background: var(--oak-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.oakie-avatar-large {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--oak-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-md);
+}
+
+.oakie-icon-large {
+  font-size: 2rem;
+}
+
+.help-agent-placeholder h2 {
+  margin-bottom: var(--space-xs);
+}
+
+.help-agent-placeholder > p {
+  color: var(--oak-text-light);
+  margin-bottom: var(--space-md);
+}
+
+.help-hint {
+  font-size: 0.9rem;
+  color: var(--oak-text-light);
+}
+
+.help-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.help-prompt-btn {
+  padding: 10px 20px;
+  background: var(--oak-light-gray);
+  border: 1px solid var(--oak-gray);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--oak-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.help-prompt-btn:hover {
+  background: var(--oak-primary);
+  color: var(--oak-white);
+  border-color: var(--oak-primary);
+}
+
+.help-input-area {
+  display: flex;
+  gap: var(--space-sm);
+  max-width: 560px;
+  margin: 0 auto var(--space-md);
+}
+
+.help-input {
+  flex: 1;
+  padding: 14px 20px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 2px solid var(--oak-gray);
+  border-radius: var(--radius-pill);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.help-input:focus {
+  border-color: var(--oak-secondary);
+}
+
+.help-send-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--oak-secondary);
+  color: var(--oak-white);
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.help-send-btn:hover {
+  background: var(--oak-primary);
+}
+
+.help-note {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+@media (max-width: 768px) {
+  .help-agent-placeholder {
+    padding: var(--space-xl);
+  }
+}
