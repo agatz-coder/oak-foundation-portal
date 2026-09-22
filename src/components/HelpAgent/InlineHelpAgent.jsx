@@ -4,6 +4,24 @@ import SkeletonLoader from './SkeletonLoader';
 import { SF_CONFIG } from '../../config/salesforce';
 import './InlineHelpAgent.css';
 
+/** SVG oak leaf icon — works reliably across all browsers (no emoji issues) */
+const OakLeafIcon = ({ size = 32 }) => (
+  <svg width={size} height={size} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M32 4C24 12 12 20 12 36c0 10 8 20 20 24 12-4 20-14 20-24C52 20 40 12 32 4z"
+      fill="#2E7D32"
+      stroke="#1B5E20"
+      strokeWidth="2"
+    />
+    <path
+      d="M32 16v36M32 28c-6-2-10 0-10 0M32 36c6-2 10 0 10 0M32 22c4-1 7 1 7 1M32 44c-5-1-8 1-8 1"
+      stroke="#A5D6A7"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 /**
  * InlineHelpAgent — the "Ask Oakie" inline chat interface.
  *
@@ -60,7 +78,7 @@ function InlineHelpAgent({ initialPrompt }) {
       <div className="inline-help-agent">
         <div className="help-agent-fallback">
           <div className="oakie-avatar-lg">
-            <span className="oakie-icon-lg">&#x1F333;</span>
+            <OakLeafIcon size={36} />
           </div>
           <h3>Oakie is having trouble connecting</h3>
           <p>{error || 'Please try refreshing the page.'}</p>
@@ -84,7 +102,7 @@ function InlineHelpAgent({ initialPrompt }) {
         <div className="help-agent-active">
           <div className="help-agent-active-header">
             <div className="oakie-avatar-sm">
-              <span>&#x1F333;</span>
+              <OakLeafIcon size={20} />
             </div>
             <div>
               <h3>Ask Oakie</h3>
@@ -106,7 +124,7 @@ function InlineHelpAgent({ initialPrompt }) {
       <div className="inline-help-agent">
         <div className="help-agent-ended">
           <div className="oakie-avatar-lg">
-            <span className="oakie-icon-lg">&#x1F333;</span>
+            <OakLeafIcon size={36} />
           </div>
           <h3>Chat ended</h3>
           <p>Thank you for reaching out. You can start a new conversation anytime.</p>
@@ -125,7 +143,7 @@ function InlineHelpAgent({ initialPrompt }) {
         {/* Avatar & greeting */}
         <div className="welcome-header">
           <div className="oakie-avatar-lg">
-            <span className="oakie-icon-lg">&#x1F333;</span>
+            <OakLeafIcon size={36} />
           </div>
           <h3>Ask Oakie</h3>
           <p className="welcome-subtitle">Your AI-powered assistant for OAK Foundation</p>

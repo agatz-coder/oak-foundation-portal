@@ -27,7 +27,7 @@ export const SF_CONFIG = {
   // Chat configuration
   chat: {
     height: '550px',
-    enableDebugLogs: false,
+    enableDebugLogs: true,
     showCannedPrompts: true,
     cannedPrompts: [
       'How do I apply for a grant?',
