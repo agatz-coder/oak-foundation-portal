@@ -13,7 +13,7 @@ export const SF_CONFIG = {
   deploymentApiName: 'Oak_Selfhelp',
 
   // Experience Cloud Site URL (ESW Oak Selfhelp)
-  siteUrl: 'https://trailsignup-a15be389d2c0be.my.site.com/ESWOakSelfhelp1789740723669vforcesite',
+  siteUrl: 'https://trailsignup-a15be389d2c0be.my.site.com/ESWOakSelfhelp1789740723669',
 
   // SCRT2 URL
   scrt2Url: 'https://trailsignup-a15be389d2c0be.my.salesforce-scrt.com',
