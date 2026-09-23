@@ -131,6 +131,9 @@ export default function useEmbeddedMessaging() {
         // Hide the default floating chat button — we use our own UI
         esb.settings.hideChatButton = true;
 
+        // WebV2 SDK requires language to be set — validation fails without it
+        esb.settings.language = 'en';
+
         console.log('[Oakie] Calling init() with:', {
           orgId: SF_CONFIG.orgId,
           deploymentApiName: SF_CONFIG.deploymentApiName,
