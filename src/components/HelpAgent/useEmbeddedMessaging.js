@@ -1,8 +1,12 @@
 /**
  * useEmbeddedMessaging — React hook to manage the Salesforce Embedded Messaging SDK lifecycle.
  *
- * Supports both WebV1 (MIAW) and WebV2 (Agentforce Chat) deployments.
+ * Supports WebV2 (Agentforce Chat) deployments.
  * The SDK dispatches CustomEvents on the window object for state tracking.
+ *
+ * Strategy: We do NOT try to send messages programmatically. The SDK's native
+ * chat widget handles all messaging. Our React UI is just the trigger —
+ * we call launchChat() and the SDK takes over.
  *
  * States:
  *   loading  → SDK script is being loaded
@@ -14,7 +18,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { SF_CONFIG } from '../../config/salesforce';
 
-// Use init.min.js directly — WebV2 deployments redirect bootstrap.min.js to init.min.js
 const SDK_SRC = `${SF_CONFIG.siteUrl}/assets/js/bootstrap.min.js`;
 
 // Timeout in ms — if SDK doesn't become ready within this, show error
@@ -47,7 +50,7 @@ export default function useEmbeddedMessaging() {
         if (prev === STATE.LOADING) {
           console.warn('[Oakie] SDK init timed out after', INIT_TIMEOUT, 'ms');
           setError(
-            'The chat service is taking too long to respond. This may be a configuration issue. Please try refreshing.'
+            'The chat service is taking too long to respond. Please try refreshing.'
           );
           return STATE.ERROR;
         }
@@ -71,7 +74,7 @@ export default function useEmbeddedMessaging() {
     const onInitError = (e) => {
       console.error('[Oakie] SDK init error:', e.detail || e);
       clearTimeout(timeoutRef.current);
-      setError('Chat initialisation failed. The deployment may not be configured for external access.');
+      setError('Chat initialisation failed. Please try refreshing the page.');
       setStatus(STATE.ERROR);
     };
 
@@ -85,6 +88,11 @@ export default function useEmbeddedMessaging() {
       setStatus(STATE.CHATTING);
     };
 
+    const onConversationEnded = () => {
+      console.log('[Oakie] Conversation ended');
+      setStatus(STATE.ENDED);
+    };
+
     const onWindowMinimized = () => {
       console.log('[Oakie] Window minimized');
     };
@@ -95,12 +103,13 @@ export default function useEmbeddedMessaging() {
       setStatus(STATE.READY);
     };
 
-    // Listen for both MIAW and Agentforce Chat events
+    // Listen for SDK events
     window.addEventListener('onEmbeddedMessagingReady', onReady);
     window.addEventListener('onEmbeddedMessagingInitSuccess', onInitSuccess);
     window.addEventListener('onEmbeddedMessagingInitError', onInitError);
     window.addEventListener('onEmbeddedMessagingConversationStarted', onConversationStarted);
     window.addEventListener('onEmbeddedMessagingConversationOpened', onConversationOpened);
+    window.addEventListener('onEmbeddedMessagingConversationEnded', onConversationEnded);
     window.addEventListener('onEmbeddedMessagingWindowMinimized', onWindowMinimized);
     window.addEventListener('onEmbeddedMessagingButtonCreated', onButtonCreated);
 
@@ -114,34 +123,21 @@ export default function useEmbeddedMessaging() {
       try {
         console.log('[Oakie] SDK script loaded successfully');
 
-        // Always use embeddedservice_bootstrap — works for both WebV1 and WebV2
         const esb = window.embeddedservice_bootstrap;
         if (!esb) {
           throw new Error('embeddedservice_bootstrap not found after script load');
         }
 
         console.log('[Oakie] embeddedservice_bootstrap object found');
-        console.log('[Oakie] ESB properties:', Object.keys(esb).join(', '));
 
-        // Also log if agentforce_messaging is available
-        if (window.agentforce_messaging) {
-          console.log('[Oakie] agentforce_messaging also present (WebV2 deployment)');
-        }
-
-        // Hide the default floating chat button — we use our own UI
+        // Hide the default floating chat button — we use our own UI to trigger
         esb.settings.hideChatButton = true;
 
-        // WebV2 SDK requires language to be set — validation fails without it
+        // WebV2 SDK requires language to be set
         esb.settings.language = 'en';
 
-        console.log('[Oakie] Calling init() with:', {
-          orgId: SF_CONFIG.orgId,
-          deploymentApiName: SF_CONFIG.deploymentApiName,
-          siteUrl: SF_CONFIG.siteUrl,
-          scrt2Url: SF_CONFIG.scrt2Url,
-        });
+        console.log('[Oakie] Calling init()...');
 
-        // Use the standard MIAW init signature — works for Web deployments (V1 and V2)
         esb.init(
           SF_CONFIG.orgId,
           SF_CONFIG.deploymentApiName,
@@ -149,7 +145,7 @@ export default function useEmbeddedMessaging() {
           { scrt2URL: SF_CONFIG.scrt2Url }
         );
 
-        console.log('[Oakie] init() called, waiting for onEmbeddedMessagingReady...');
+        console.log('[Oakie] init() called, waiting for SDK ready event...');
       } catch (err) {
         console.error('[Oakie] Init error:', err);
         clearTimeout(timeoutRef.current);
@@ -166,7 +162,8 @@ export default function useEmbeddedMessaging() {
 
     document.body.appendChild(script);
 
-    // Cleanup on unmount
+    // Cleanup on unmount — remove event listeners but keep the script
+    // (removing the script breaks the SDK's internal state/reconnection)
     return () => {
       clearTimeout(timeoutRef.current);
       window.removeEventListener('onEmbeddedMessagingReady', onReady);
@@ -174,29 +171,31 @@ export default function useEmbeddedMessaging() {
       window.removeEventListener('onEmbeddedMessagingInitError', onInitError);
       window.removeEventListener('onEmbeddedMessagingConversationStarted', onConversationStarted);
       window.removeEventListener('onEmbeddedMessagingConversationOpened', onConversationOpened);
+      window.removeEventListener('onEmbeddedMessagingConversationEnded', onConversationEnded);
       window.removeEventListener('onEmbeddedMessagingWindowMinimized', onWindowMinimized);
       window.removeEventListener('onEmbeddedMessagingButtonCreated', onButtonCreated);
-      try {
-        document.body.removeChild(script);
-      } catch {
-        // Script may already be gone
-      }
     };
   }, []);
 
   // ── 2. Launch / open the chat ────────────────────────────────────
   const launchChat = useCallback(() => {
     const esb = window.embeddedservice_bootstrap;
-    if (!esb) return;
+    if (!esb) {
+      console.error('[Oakie] Cannot launch chat — SDK not loaded');
+      return;
+    }
     try {
+      console.log('[Oakie] Launching chat via utilAPI.launchChat()...');
       esb.utilAPI.launchChat();
     } catch (err) {
       console.error('[Oakie] launchChat error:', err);
+      // Fallback: show the default button and click it
       try {
         esb.showChatButton();
         setTimeout(() => {
-          const chatBtn = document.querySelector('.embeddedMessagingConversationButton') ||
-                          document.querySelector('[class*="embeddedMessaging"]');
+          const chatBtn =
+            document.querySelector('.embeddedMessagingConversationButton') ||
+            document.querySelector('[class*="embeddedMessaging"]');
           if (chatBtn) chatBtn.click();
         }, 300);
       } catch (err2) {
@@ -205,18 +204,5 @@ export default function useEmbeddedMessaging() {
     }
   }, []);
 
-  // ── 3. Send a message into the chat ──────────────────────────────
-  const sendMessage = useCallback(async (text) => {
-    const esb = window.embeddedservice_bootstrap;
-    if (!esb || !text) return;
-    try {
-      if (esb.prechatAPI && esb.prechatAPI.setHiddenPrechatFields) {
-        await esb.prechatAPI.setHiddenPrechatFields({ Question: text });
-      }
-    } catch (err) {
-      console.error('[Oakie] sendMessage error:', err);
-    }
-  }, []);
-
-  return { status, error, launchChat, sendMessage, STATE };
+  return { status, error, launchChat, STATE };
 }

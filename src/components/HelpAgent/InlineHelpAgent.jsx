@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import useEmbeddedMessaging from './useEmbeddedMessaging';
 import SkeletonLoader from './SkeletonLoader';
 import { SF_CONFIG } from '../../config/salesforce';
@@ -27,41 +27,15 @@ const OakLeafIcon = ({ size = 32 }) => (
  *
  * It manages three visual phases:
  *   1. Loading  → shimmer skeleton while SDK boots
- *   2. Welcome  → avatar, canned prompts, input bar (SDK ready, no chat yet)
- *   3. Chatting → Salesforce Messaging iFrame takes over
+ *   2. Welcome  → avatar, canned prompts that open the SDK's native chat widget
+ *   3. Chatting → SDK's native chat widget is open (shown in bottom-right)
  *
- * If the SDK fails to load, a graceful fallback is shown with a link to the
- * Experience Cloud site where the agent also lives.
+ * The SDK's native widget handles all messaging. Our React UI is just
+ * a branded trigger — clicking any prompt or the "Start" button calls
+ * launchChat() which opens the SDK's chat widget.
  */
-function InlineHelpAgent({ initialPrompt }) {
-  const { status, error, launchChat, sendMessage, STATE } = useEmbeddedMessaging();
-  const [inputText, setInputText] = useState('');
-
-  // Send a canned prompt or typed message
-  const handleSend = useCallback(
-    (text) => {
-      const message = text || inputText;
-      if (!message.trim()) return;
-      sendMessage(message);
-      launchChat();
-      setInputText('');
-    },
-    [inputText, sendMessage, launchChat]
-  );
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
-
-  // If an initial prompt was passed (e.g. from Home page canned prompt link), trigger it
-  React.useEffect(() => {
-    if (initialPrompt && status === STATE.READY) {
-      handleSend(initialPrompt);
-    }
-  }, [status, initialPrompt, STATE.READY, handleSend]);
+function InlineHelpAgent() {
+  const { status, error, launchChat, STATE } = useEmbeddedMessaging();
 
   // ── Loading state ────────────────────────────────────────────────
   if (status === STATE.LOADING) {
@@ -95,7 +69,7 @@ function InlineHelpAgent({ initialPrompt }) {
     );
   }
 
-  // ── Chat active — SDK renders in its own iFrame ──────────────────
+  // ── Chat active — SDK's native widget is handling the conversation ──
   if (status === STATE.CHATTING) {
     return (
       <div className="inline-help-agent">
@@ -111,7 +85,7 @@ function InlineHelpAgent({ initialPrompt }) {
             </div>
           </div>
           <p className="help-agent-active-note">
-            The chat window should appear. If it doesn't, please check your browser's pop-up settings.
+            Your conversation is open in the chat window below. If you don't see it, click the chat icon in the bottom-right corner.
           </p>
         </div>
       </div>
@@ -136,7 +110,7 @@ function InlineHelpAgent({ initialPrompt }) {
     );
   }
 
-  // ── Ready state — welcome screen with prompts ───────────────────
+  // ── Ready state — welcome screen with launch buttons ─────────────
   return (
     <div className="inline-help-agent">
       <div className="help-agent-welcome">
@@ -147,45 +121,28 @@ function InlineHelpAgent({ initialPrompt }) {
           </div>
           <h3>Ask Oakie</h3>
           <p className="welcome-subtitle">Your AI-powered assistant for OAK Foundation</p>
-          <p className="welcome-hint">
-            Try asking about any of the following — or anything else about how we work:
-          </p>
         </div>
 
-        {/* Canned prompts */}
+        {/* Start conversation button */}
+        <button className="btn btn-primary start-chat-btn" onClick={launchChat}>
+          Start a conversation &#8594;
+        </button>
+
+        {/* Suggested topics */}
         {SF_CONFIG.chat.showCannedPrompts && (
           <div className="welcome-prompts">
+            <p className="welcome-hint">Or try asking about:</p>
             {SF_CONFIG.chat.cannedPrompts.map((prompt) => (
               <button
                 key={prompt}
                 className="prompt-btn"
-                onClick={() => handleSend(prompt)}
+                onClick={launchChat}
               >
                 {prompt}
               </button>
             ))}
           </div>
         )}
-
-        {/* Text input */}
-        <div className="welcome-input-area">
-          <input
-            type="text"
-            placeholder="Type your question here..."
-            className="welcome-input"
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <button
-            className="welcome-send-btn"
-            onClick={() => handleSend()}
-            disabled={!inputText.trim()}
-            aria-label="Send message"
-          >
-            &#8594;
-          </button>
-        </div>
       </div>
     </div>
   );
