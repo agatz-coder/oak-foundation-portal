@@ -10,10 +10,10 @@ export const SF_CONFIG = {
   orgId: '00Dg700000GH4dvEAD',
 
   // Embedded Service Deployment API Name
-  deploymentApiName: 'Oak_Selfhelp',
+  deploymentApiName: 'Oaki_External_Help',
 
-  // Experience Cloud Site URL (ESW Oak Selfhelp)
-  siteUrl: 'https://trailsignup-a15be389d2c0be.my.site.com/ESWOakSelfhelp1789740723669',
+  // Experience Cloud Site URL (ESW Oaki External Help)
+  siteUrl: 'https://trailsignup-a15be389d2c0be.my.site.com/ESWOakiExternalHelp1790156894075',
 
   // SCRT2 URL
   scrt2Url: 'https://trailsignup-a15be389d2c0be.my.salesforce-scrt.com',
