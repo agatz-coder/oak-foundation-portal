@@ -114,65 +114,39 @@ export default function useEmbeddedMessaging() {
       try {
         console.log('[Oakie] SDK script loaded successfully');
 
-        // Try agentforce_messaging first (WebV2), fall back to embeddedservice_bootstrap (WebV1)
-        const afm = window.agentforce_messaging;
+        // Always use embeddedservice_bootstrap — works for both WebV1 and WebV2
         const esb = window.embeddedservice_bootstrap;
-
-        if (afm) {
-          console.log('[Oakie] agentforce_messaging object found (WebV2)');
-          console.log('[Oakie] AFM properties:', Object.keys(afm).join(', '));
-
-          // WebV2 Agentforce Chat init
-          try {
-            if (afm.settings) {
-              afm.settings.hideChatButton = true;
-            }
-          } catch (e) {
-            console.log('[Oakie] Could not set hideChatButton on afm:', e.message);
-          }
-
-          console.log('[Oakie] Calling agentforce_messaging.init() with:', {
-            siteUrl: SF_CONFIG.siteUrl,
-            orgId: SF_CONFIG.orgId,
-            deploymentApiName: SF_CONFIG.deploymentApiName,
-            scrt2Url: SF_CONFIG.scrt2Url,
-          });
-
-          afm.init({
-            siteUrl: SF_CONFIG.siteUrl,
-            agentApiConfiguration: {
-              agentId: SF_CONFIG.deploymentApiName,
-              domainUrl: SF_CONFIG.instanceUrl,
-            },
-            uiConfiguration: {},
-          });
-
-          console.log('[Oakie] agentforce_messaging.init() called');
-        } else if (esb) {
-          console.log('[Oakie] embeddedservice_bootstrap object found (WebV1)');
-          console.log('[Oakie] ESB properties:', Object.keys(esb).join(', '));
-
-          // WebV1 MIAW init
-          esb.settings.hideChatButton = true;
-
-          console.log('[Oakie] Calling embeddedservice_bootstrap.init() with:', {
-            orgId: SF_CONFIG.orgId,
-            deploymentApiName: SF_CONFIG.deploymentApiName,
-            siteUrl: SF_CONFIG.siteUrl,
-            scrt2Url: SF_CONFIG.scrt2Url,
-          });
-
-          esb.init(
-            SF_CONFIG.orgId,
-            SF_CONFIG.deploymentApiName,
-            SF_CONFIG.siteUrl,
-            { scrt2URL: SF_CONFIG.scrt2Url }
-          );
-
-          console.log('[Oakie] embeddedservice_bootstrap.init() called');
-        } else {
-          throw new Error('Neither agentforce_messaging nor embeddedservice_bootstrap found after script load');
+        if (!esb) {
+          throw new Error('embeddedservice_bootstrap not found after script load');
         }
+
+        console.log('[Oakie] embeddedservice_bootstrap object found');
+        console.log('[Oakie] ESB properties:', Object.keys(esb).join(', '));
+
+        // Also log if agentforce_messaging is available
+        if (window.agentforce_messaging) {
+          console.log('[Oakie] agentforce_messaging also present (WebV2 deployment)');
+        }
+
+        // Hide the default floating chat button — we use our own UI
+        esb.settings.hideChatButton = true;
+
+        console.log('[Oakie] Calling init() with:', {
+          orgId: SF_CONFIG.orgId,
+          deploymentApiName: SF_CONFIG.deploymentApiName,
+          siteUrl: SF_CONFIG.siteUrl,
+          scrt2Url: SF_CONFIG.scrt2Url,
+        });
+
+        // Use the standard MIAW init signature — works for Web deployments (V1 and V2)
+        esb.init(
+          SF_CONFIG.orgId,
+          SF_CONFIG.deploymentApiName,
+          SF_CONFIG.siteUrl,
+          { scrt2URL: SF_CONFIG.scrt2Url }
+        );
+
+        console.log('[Oakie] init() called, waiting for onEmbeddedMessagingReady...');
       } catch (err) {
         console.error('[Oakie] Init error:', err);
         clearTimeout(timeoutRef.current);
@@ -209,41 +183,32 @@ export default function useEmbeddedMessaging() {
 
   // ── 2. Launch / open the chat ────────────────────────────────────
   const launchChat = useCallback(() => {
-    // Try both SDK globals
-    const afm = window.agentforce_messaging;
     const esb = window.embeddedservice_bootstrap;
-    const sdk = afm || esb;
-    if (!sdk) return;
-
+    if (!esb) return;
     try {
-      if (sdk.utilAPI && sdk.utilAPI.launchChat) {
-        sdk.utilAPI.launchChat();
-      } else if (sdk.showChatButton) {
-        sdk.showChatButton();
-        setTimeout(() => {
-          const chatBtn = document.querySelector('.embeddedMessagingConversationButton') ||
-                          document.querySelector('[class*="embeddedMessaging"]') ||
-                          document.querySelector('[class*="agentforce"]');
-          if (chatBtn) chatBtn.click();
-        }, 300);
-      }
+      esb.utilAPI.launchChat();
     } catch (err) {
       console.error('[Oakie] launchChat error:', err);
+      try {
+        esb.showChatButton();
+        setTimeout(() => {
+          const chatBtn = document.querySelector('.embeddedMessagingConversationButton') ||
+                          document.querySelector('[class*="embeddedMessaging"]');
+          if (chatBtn) chatBtn.click();
+        }, 300);
+      } catch (err2) {
+        console.error('[Oakie] launchChat fallback error:', err2);
+      }
     }
   }, []);
 
   // ── 3. Send a message into the chat ──────────────────────────────
   const sendMessage = useCallback(async (text) => {
-    const afm = window.agentforce_messaging;
     const esb = window.embeddedservice_bootstrap;
-    const sdk = afm || esb;
-    if (!sdk || !text) return;
-
+    if (!esb || !text) return;
     try {
-      if (sdk.sendMessage) {
-        await sdk.sendMessage(text);
-      } else if (sdk.prechatAPI && sdk.prechatAPI.setHiddenPrechatFields) {
-        await sdk.prechatAPI.setHiddenPrechatFields({ Question: text });
+      if (esb.prechatAPI && esb.prechatAPI.setHiddenPrechatFields) {
+        await esb.prechatAPI.setHiddenPrechatFields({ Question: text });
       }
     } catch (err) {
       console.error('[Oakie] sendMessage error:', err);
